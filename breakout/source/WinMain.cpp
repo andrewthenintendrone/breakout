@@ -5,7 +5,8 @@
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine, int cmdShow)
 {
     sf::RenderWindow window(sf::VideoMode(640, 480), "breakout");
-    GameObject testObject(std::string("ship.png"));
+    GameObject testObject;
+    testObject.setSprite(std::string("ship.png"));
 
     while (window.isOpen())
     {
