@@ -45,19 +45,19 @@ void GameObject::handleInput(float deltaTime)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
-        transform.translate(transform.forwardVector() * 300.0f * deltaTime);
+        transform.translate(transform.forwardVector() * 360.0f * deltaTime);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-        transform.rotate(-180 * deltaTime);
+        transform.rotate(-360 * deltaTime);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-        transform.translate(transform.forwardVector() * -300.0f * deltaTime);
+        transform.translate(transform.forwardVector() * -360.0f * deltaTime);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        transform.rotate(180 * deltaTime);
+        transform.rotate(360 * deltaTime);
     }
     updateTransform();
 }

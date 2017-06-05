@@ -16,10 +16,9 @@ public:
     void handleInput(float deltaTime);
 
     Transform transform;
+    void updateTransform();
 protected:
 private:
     sf::Texture* m_texture;
     sf::Sprite* m_sprite;
-
-    void updateTransform();
 };

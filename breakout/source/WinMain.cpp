@@ -1,14 +1,17 @@
-#include <Windows.h>
 #include <SFML\Graphics.hpp>
+#include <Windows.h>
 #include "GameObject.h"
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine, int cmdShow)
 {
-    sf::RenderWindow window(sf::VideoMode(640, 480), "breakout");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "breakout");
 
-    GameObject testObject;
-    testObject.setSprite(std::string("ship.png"));
-    testObject.transform.translate(window.getSize().x / 2.0f, window.getSize().y / 2.0f);
+    GameObject plane(std::string("mouse.png"));
+    GameObject x(std::string("x.png"));
+    x.transform.translate(window.getSize().x - (x.getSprite().getGlobalBounds().width / 2), x.getSprite().getGlobalBounds().height / 2);
+    x.updateTransform();
+    plane.transform.translate(window.getSize().x / 2.0f, window.getSize().y / 2.0f);
+    plane.updateTransform();
 
     sf::Clock clock;
     sf::Time deltaTime;
@@ -30,11 +33,17 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
                 window.close();
             }
         }
-
-        testObject.handleInput(deltaTime.asSeconds());
-
+        sf::FloatRect hitbox = x.getSprite().getGlobalBounds();
+        hitbox.left += 20;
+        hitbox.height -= 20;
+        if (plane.getSprite().getGlobalBounds().intersects(hitbox))
+        {
+            window.close();
+        }
+        plane.handleInput(deltaTime.asSeconds());
         window.clear();
-        window.draw(testObject.getSprite());
+        window.draw(x.getSprite());
+        window.draw(plane.getSprite());
         window.display();
     }
 

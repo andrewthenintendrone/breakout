@@ -37,7 +37,6 @@ void Transform::rotate(float angle)
 // scales this GameObject using a Vector2
 void Transform::scale(sf::Vector2f& scaleAmount)
 {
-
     m_scale += scaleAmount;
 }
 
