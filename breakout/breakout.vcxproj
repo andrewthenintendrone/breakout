@@ -91,10 +91,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\GameObject.cpp" />
+    <ClCompile Include="source\Transform.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\GameObject.h" />
+    <ClInclude Include="source\Transform.h" />
+    <ClInclude Include="source\VectorMath.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

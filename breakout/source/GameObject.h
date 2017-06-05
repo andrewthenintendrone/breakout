@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML\Graphics.hpp>
+#include "Transform.h"
 
 class GameObject
 {
@@ -12,10 +13,13 @@ public:
     // get and set sprite
     sf::Sprite& getSprite();
     void setSprite(std::string& imageFileName);
+    void handleInput(float deltaTime);
+
+    Transform transform;
 protected:
-    void handleEvent(sf::Event currentEvent);
 private:
     sf::Texture* m_texture;
     sf::Sprite* m_sprite;
-    // Transform
+
+    void updateTransform();
 };
