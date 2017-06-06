@@ -17,8 +17,7 @@ std::string getPath()
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine, int cmdShow)
 {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "breakout");
-    WINDOW->setWindow(&window);
+    WINDOW->createWindow(sf::VideoMode(1280, 720), "Breakout");
 
     // font
     sf::Font font;
@@ -35,7 +34,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
     unsigned int points = 1;
 
     Paddle paddle(getPath() + "\\resources\\paddle.png");
-    paddle.transform.translate(window.getSize().x / 2.0f, window.getSize().y - (paddle.getSprite().getGlobalBounds().height / 2.0f));
+    paddle.transform.translate(WINDOW->getSize().x / 2.0f, WINDOW->getSize().y - (paddle.getSprite().getGlobalBounds().height / 2.0f));
 
     Ball ball(getPath() + "\\resources\\PokeBall_ball.png");
     ball.transform.translate(200, 300);
@@ -44,31 +43,31 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
     sf::Clock clock;
     sf::Time deltaTime;
 
-    while (window.isOpen())
+    while (WINDOW->getWindow()->isOpen())
     {
         sf::Event event;
-        while (window.pollEvent(event))
+        while (WINDOW->getWindow()->pollEvent(event))
         {
             if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
             {
-                window.close();
+                WINDOW->closeWindow();
             }
             if (event.type == sf::Event::Closed)
             {
-                window.close();
+                WINDOW->closeWindow();
             }
         }
         TIME->Update();
         paddle.Update();
         ball.Update();
-        window.clear();
-        if (ball.getSprite().getGlobalBounds().top >= 720)
+        WINDOW->getWindow()->clear();
+        if (ball.getSprite().getGlobalBounds().top >= WINDOW->getSize().y)
         {
-            window.draw(text);
+            WINDOW->getWindow()->draw(text);
         }
-        window.draw(paddle.getSprite());
-        window.draw(ball.getSprite());
-        window.display();
+        WINDOW->getWindow()->draw(paddle.getSprite());
+        WINDOW->getWindow()->draw(ball.getSprite());
+        WINDOW->getWindow()->display();
     }
 
     return 0;

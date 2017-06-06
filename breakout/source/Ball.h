@@ -22,7 +22,7 @@ public:
     {
         sf::FloatRect bounds = getSprite().getGlobalBounds();
         // sides
-        if (bounds.left <= 0 || bounds.left + bounds.width >= 1280)
+        if (bounds.left <= 0 || bounds.left + bounds.width >= WINDOW->getSize().x)
         {
             xVelocity = -xVelocity;
         }
@@ -32,7 +32,7 @@ public:
             yVelocity = -yVelocity;
         }
         // bottom
-        if (bounds.top + bounds.height >= 720)
+        if (bounds.top + bounds.height >= WINDOW->getSize().y)
         {
 
         }
