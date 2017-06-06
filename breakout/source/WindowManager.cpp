@@ -16,7 +16,6 @@ void WindowManager::closeWindow()
     if (m_window)
     {
         m_window->close();
-        delete(m_window);
     }
 }
 
