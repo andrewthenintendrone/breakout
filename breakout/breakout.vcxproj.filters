@@ -56,5 +56,8 @@
     <ClInclude Include="source\WindowManager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\Brick.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

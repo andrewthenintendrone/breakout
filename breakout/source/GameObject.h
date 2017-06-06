@@ -12,12 +12,14 @@ public:
     GameObject(std::string& imageFileName);
     virtual ~GameObject();
 
-    // get and set sprite
+    // transform
+    Transform transform;
+
+    // Sprite
     sf::Sprite& getSprite();
     void setSprite(std::string& imageFileName);
-    virtual void Update() = 0 {};
 
-    Transform transform;
+    virtual void Update() = 0 {};
     void updateTransform();
     void init();
 protected:
