@@ -22,15 +22,20 @@ public:
     void Ball::Update()
     {
         sf::FloatRect bounds = getSprite().getGlobalBounds();
-        // sides
-        if (bounds.left <= 0 || bounds.left + bounds.width >= WINDOW->getSize().x)
+        // left side
+        if (bounds.left <= 0)
         {
-            velocity.x = -velocity.x;
+            velocity.x = fabsf(velocity.x);
+        }
+        // right side
+        if(bounds.left + bounds.width >= WINDOW->getSize().x)
+        {
+            velocity.x = -fabsf(velocity.x);
         }
         // top
         if (bounds.top <= 0)
         {
-            velocity.y = -velocity.y;
+            velocity.y = fabsf(velocity.y);
         }
         // bottom
         if (bounds.top + bounds.height >= WINDOW->getSize().y)
@@ -41,7 +46,7 @@ public:
         if (bounds.intersects(paddle->getSprite().getGlobalBounds()))
         {
             // make this better
-            velocity.y = -velocity.y;
+            velocity.y = -fabsf(velocity.y);
         }
         //bricks
         for (unsigned int i = 0; i < bricks.size(); i++)
