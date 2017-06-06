@@ -1,0 +1,1 @@
+xcopy "%cd%\resources" "%cd%\bin\resources\" /e /y /i /r

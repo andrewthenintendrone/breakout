@@ -1,14 +1,15 @@
 #include "GameObject.h"
 
 // default GameObject constructor
-GameObject::GameObject() : m_texture(new sf::Texture), m_sprite(new sf::Sprite)
+GameObject::GameObject(void)
 {
-
+    init();
 }
 
 // construct with string of image file
-GameObject::GameObject(std::string& imageFileName) : m_texture(new sf::Texture), m_sprite(new sf::Sprite)
+GameObject::GameObject(std::string& imageFileName)
 {
+    init();
     setSprite(imageFileName);
 }
 
@@ -40,32 +41,16 @@ void GameObject::setSprite(std::string& imageFileName)
     }
 }
 
-// handles events
-void GameObject::handleInput(float deltaTime)
-{
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-    {
-        transform.translate(transform.forwardVector() * 360.0f * deltaTime);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-    {
-        transform.rotate(-360 * deltaTime);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-    {
-        transform.translate(transform.forwardVector() * -360.0f * deltaTime);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-    {
-        transform.rotate(360 * deltaTime);
-    }
-    updateTransform();
-}
-
 // updates how the sprite looks
 void GameObject::updateTransform()
 {
     m_sprite->setPosition(transform.m_position);
     m_sprite->setRotation(transform.m_rotation);
     m_sprite->setScale(transform.m_scale);
+}
+
+void GameObject::init()
+{
+    m_texture = new sf::Texture;
+    m_sprite = new sf::Sprite;
 }
