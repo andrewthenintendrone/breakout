@@ -1,5 +1,6 @@
 #include <SFML\Graphics.hpp>
 #include <Windows.h>
+#include "WindowManager.h"
 #include "TimeManager.h"
 #include "GameObject.h"
 #include "Paddle.h"
@@ -17,6 +18,7 @@ std::string getPath()
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine, int cmdShow)
 {
     sf::RenderWindow window(sf::VideoMode(1280, 720), "breakout");
+    WINDOW->setWindow(&window);
 
     // font
     sf::Font font;
@@ -35,7 +37,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
     Paddle paddle(getPath() + "\\resources\\paddle.png");
     paddle.transform.translate(window.getSize().x / 2.0f, window.getSize().y - (paddle.getSprite().getGlobalBounds().height / 2.0f));
 
-    Ball ball(getPath() + "\\resources\\ball.png");
+    Ball ball(getPath() + "\\resources\\PokeBall_ball.png");
     ball.transform.translate(200, 300);
     ball.setPaddle(&paddle);
 
@@ -57,8 +59,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
             }
         }
         TIME->Update();
-        paddle.Update(&window);
-        ball.Update(&window);
+        paddle.Update();
+        ball.Update();
         window.clear();
         if (ball.getSprite().getGlobalBounds().top >= 720)
         {

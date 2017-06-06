@@ -18,7 +18,7 @@ public:
     }
 
     // handles events
-    void Ball::Update(sf::RenderWindow* window)
+    void Ball::Update()
     {
         sf::FloatRect bounds = getSprite().getGlobalBounds();
         // sides

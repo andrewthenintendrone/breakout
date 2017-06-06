@@ -18,7 +18,7 @@ public:
     }
 
     // handles events
-    void Paddle::Update(sf::RenderWindow* window)
+    void Paddle::Update()
     {
         // left
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))

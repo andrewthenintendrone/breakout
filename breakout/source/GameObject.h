@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "Transform.h"
+#include "WindowManager.h"
 #include "TimeManager.h"
 
 class GameObject
@@ -14,7 +15,7 @@ public:
     // get and set sprite
     sf::Sprite& getSprite();
     void setSprite(std::string& imageFileName);
-    virtual void Update(sf::RenderWindow* window) = 0 {};
+    virtual void Update() = 0 {};
 
     Transform transform;
     void updateTransform();

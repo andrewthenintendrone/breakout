@@ -18,23 +18,23 @@ public:
     }
 
     // handles events
-    void Plane::Update(float deltaTime)
+    void Plane::Update()
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            transform.translate(transform.forwardVector() * 360.0f * deltaTime);
+            transform.translate(transform.forwardVector() * 360.0f * TIME->deltaTime);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
-            transform.rotate(-360 * deltaTime);
+            transform.rotate(-360 * TIME->deltaTime);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
-            transform.translate(transform.forwardVector() * -360.0f * deltaTime);
+            transform.translate(transform.forwardVector() * -360.0f * TIME->deltaTime);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            transform.rotate(360 * deltaTime);
+            transform.rotate(360 * TIME->deltaTime);
         }
         updateTransform();
     }
