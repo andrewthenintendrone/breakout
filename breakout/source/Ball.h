@@ -70,26 +70,27 @@ public:
     }
 
     // physics
-    void bounce(sf::FloatRect otherObjectBounds)
+    void bounce(sf::FloatRect hitRect)
     {
-        sf::FloatRect myBounds = getSprite().getGlobalBounds();
-        // hit from right
-        if (myBounds.left <= otherObjectBounds.left + otherObjectBounds.width)
-        {
-            velocity.x = -velocity.x;
-        }
+        sf::Vector2f myPosition = getSprite().getPosition();
+
         // hit from left
-        if (myBounds.left + myBounds.width >= otherObjectBounds.left)
+        if (myPosition.x < hitRect.left)
         {
             velocity.x = -velocity.x;
         }
-        // hit from below
-        if (myBounds.top <= otherObjectBounds.top + otherObjectBounds.height)
+        // hit from right
+        else if (myPosition.x > hitRect.left + hitRect.width)
+        {
+            velocity.x = -velocity.x;
+        }
+        // hit from above
+        else if (myPosition.y < hitRect.top)
         {
             velocity.y = -velocity.y;
         }
-        // hit from above
-        if (myBounds.top + myBounds.height >= otherObjectBounds.top)
+        // hit from below
+        else if (myPosition.y > hitRect.top + hitRect.height)
         {
             velocity.y = -velocity.y;
         }
