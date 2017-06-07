@@ -3,7 +3,7 @@
 #include "Transform.h"
 #include "WindowManager.h"
 #include "TimeManager.h"
-#include "State.h"
+#include "FiniteStateMachine.h"
 
 class GameObject
 {
@@ -21,7 +21,6 @@ public:
     void setSprite(std::string& imageFileName);
 
     void setState(State* newState);
-    virtual void Update() = 0 {};
     void updateTransform();
     void init();
 protected:

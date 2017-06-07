@@ -103,6 +103,6 @@ public:
 
 private:
     std::vector<Brick*> bricks;
-    sf::Vector2f velocity = sf::Vector2f(200, 200);
+    sf::Vector2f velocity = sf::Vector2f(400, 400);
     Paddle* paddle;
 };
