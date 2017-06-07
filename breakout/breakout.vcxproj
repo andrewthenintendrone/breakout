@@ -97,6 +97,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\GameObject.cpp" />
+    <ClCompile Include="source\GameStateManager.cpp" />
     <ClCompile Include="source\TimeManager.cpp" />
     <ClCompile Include="source\Transform.cpp" />
     <ClCompile Include="source\WindowManager.cpp" />
@@ -106,9 +107,12 @@
     <ClInclude Include="source\Ball.h" />
     <ClInclude Include="source\BallStates.h" />
     <ClInclude Include="source\Brick.h" />
+    <ClInclude Include="source\Condition.h" />
     <ClInclude Include="source\FiniteStateMachine.h" />
     <ClInclude Include="source\GameObject.h" />
     <ClInclude Include="source\GameManager.h" />
+    <ClInclude Include="source\GameState.h" />
+    <ClInclude Include="source\GameStateManager.h" />
     <ClInclude Include="source\Paddle.h" />
     <ClInclude Include="source\Plane.h" />
     <ClInclude Include="source\State.h" />
