@@ -105,9 +105,11 @@
   <ItemGroup>
     <ClInclude Include="source\Ball.h" />
     <ClInclude Include="source\Brick.h" />
+    <ClInclude Include="source\FiniteStateMachine.h" />
     <ClInclude Include="source\GameObject.h" />
     <ClInclude Include="source\Paddle.h" />
     <ClInclude Include="source\Plane.h" />
+    <ClInclude Include="source\State.h" />
     <ClInclude Include="source\TimeManager.h" />
     <ClInclude Include="source\Transform.h" />
     <ClInclude Include="source\VectorMath.h" />
