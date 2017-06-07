@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Ball.h" />
+    <ClInclude Include="source\BallStates.h" />
     <ClInclude Include="source\Brick.h" />
     <ClInclude Include="source\FiniteStateMachine.h" />
     <ClInclude Include="source\GameObject.h" />

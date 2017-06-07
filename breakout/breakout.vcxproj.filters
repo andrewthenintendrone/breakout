@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{00fa27d2-112e-494e-8188-65be4d1b0b6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{33c7f384-8eaa-426a-93a3-f923b88d872c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\WinMain.cpp">
@@ -25,10 +31,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\TimeManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="source\WindowManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -38,35 +44,38 @@
     <ClInclude Include="source\VectorMath.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Paddle.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Plane.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Ball.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\TimeManager.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\WindowManager.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Brick.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\State.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="source\GameObject.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\FiniteStateMachine.h">
+    <ClInclude Include="source\BallStates.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\Ball.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Brick.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Paddle.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Plane.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="source\FiniteStateMachine.h">
+      <Filter>Source Files\Managers</Filter>
+    </ClInclude>
     <ClInclude Include="source\GameManager.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TimeManager.h">
+      <Filter>Source Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="source\WindowManager.h">
+      <Filter>Source Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

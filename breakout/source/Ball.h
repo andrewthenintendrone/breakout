@@ -2,6 +2,8 @@
 #include "GameObject.h"
 #include "Brick.h"
 
+enum class ballStates { serving, moving };
+
 class Ball : public GameObject
 {
 public:
@@ -22,13 +24,14 @@ public:
     void Ball::Update()
     {
         sf::FloatRect bounds = getSprite().getGlobalBounds();
+
         // left side
         if (bounds.left <= 0)
         {
             velocity.x = fabsf(velocity.x);
         }
         // right side
-        if(bounds.left + bounds.width >= WINDOW->getSize().x)
+        if (bounds.left + bounds.width >= WINDOW->getSize().x)
         {
             velocity.x = -fabsf(velocity.x);
         }

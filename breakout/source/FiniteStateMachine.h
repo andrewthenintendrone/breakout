@@ -1,6 +1,6 @@
 #pragma once
-#include "GameObject.h"
 #include "State.h"
+class GameObject;
 
 class FiniteStateMachine
 {
