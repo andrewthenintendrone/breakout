@@ -2,6 +2,6 @@
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine, int cmdShow)
 {
-    GAMEMANAGER->runGame();
+    GameManager::getInstance()->runGame();
     return 0;
 }

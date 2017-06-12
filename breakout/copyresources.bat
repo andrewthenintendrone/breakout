@@ -1,1 +1,1 @@
-xcopy "%cd%\resources" "%cd%\bin\resources\" /e /y /i /r
+xcopy "%cd%\resources" "%cd%\bin\" /e /y /i /r

@@ -31,7 +31,7 @@ public:
         // right
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            if ((getSprite().getGlobalBounds().left + getSprite().getGlobalBounds().width) < WINDOW->getSize().x)
+            if ((getSprite().getGlobalBounds().left + getSprite().getGlobalBounds().width) < WINDOWMANAGER->getSize().x)
             {
                 transform.translate(600 * TIME->deltaTime(), 0);
             }

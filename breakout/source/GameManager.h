@@ -8,6 +8,7 @@
 #include "Paddle.h"
 #include "Ball.h"
 #include "Brick.h"
+#include "AudioManager.h"
 
 #define GAMEMANAGER GameManager::getInstance()
 
@@ -31,87 +32,90 @@ public:
 
     void runGame()
     {
+        // seed random number generator
         srand((unsigned int)time(NULL));
-        WINDOW->createWindow(sf::VideoMode(1280, 720), "Breakout");
 
-        // font
+        // create the window
+        WINDOWMANAGER->createWindow(sf::VideoMode(1280, 720), "Breakout");
+
+        // add Audio
+        AUDIOMANAGER->setMusic(getPath() + "\\resources\\audio\\music.ogg");
+        AUDIOMANAGER->setBounceSound(getPath() + "\\resources\\audio\\bounce.wav");
+        AUDIOMANAGER->playMusic();
+
+        // load font
         sf::Font font;
-        font.loadFromFile(getPath() + "\\resources\\OCRAEXT.ttf");
+        font.loadFromFile(getPath() + "\\resources\\font\\OCRAEXT.ttf");
 
-        // text
+        // set up text
         sf::Text text;
         text.setFont(font);
         text.setString("it was never seen again...");
         text.setCharacterSize(50);
         text.setFillColor(sf::Color(128, 0, 255, 255));
 
-        // points
-        unsigned int points = 1;
+        // start with 0 points
+        unsigned int points = 0;
 
-        // paddle
-        Paddle paddle(getPath() + "\\resources\\paddle.png");
-        paddle.transform.translate(WINDOW->getSize().x / 2.0f, WINDOW->getSize().y - (paddle.getSprite().getGlobalBounds().height / 2.0f));
+        // create paddle
+        Paddle paddle(getPath() + "\\resources\\graphics\\paddle.png");
+        paddle.transform.translate(WINDOWMANAGER->getSize().x / 2.0f, WINDOWMANAGER->getSize().y - (paddle.getSprite().getGlobalBounds().height / 2.0f));
 
-        // ball
-        Ball ball(getPath() + "\\resources\\ball.png");
-        ball.transform.translate(200, 300);
+        // create ball
+        Ball ball(getPath() + "\\resources\\graphics\\ball.png");
+        ball.transform.translate(14, 14);
         ball.setPaddle(&paddle);
 
-        // bricks
+        // create bricks
         std::vector<Brick*> bricks;
         sf::Texture brickTex;
-        brickTex.loadFromFile(getPath() + "\\resources\\brick_small.png");
-        for (unsigned int i = 0; i < 5; i++)
+        brickTex.loadFromFile(getPath() + "\\resources\\graphics\\brick_small.png");
+        for (unsigned int i = 0; i < 12; i++)
         {
-            for (unsigned int j = 0; j < 5; j++)
+            for (unsigned int j = 0; j < 8; j++)
             {
-                Brick* newBrick(new Brick());
-                newBrick->getSprite().setTexture(brickTex);
-                newBrick->transform.translate(200 + i * 100.0f, 100 + j * 50.0f);
-                newBrick->updateTransform();
-                bricks.push_back(newBrick);
+                if ((i % 2 == 0) ^ (j % 2 == 0))
+                {
+                    Brick* newBrick(new Brick());
+                    newBrick->getSprite().setTexture(brickTex);
+                    newBrick->transform.translate(40 + i * 100.0f, 80 + j * 50.0f);
+                    newBrick->updateTransform();
+                    bricks.push_back(newBrick);
+                }
             }
         }
         ball.setBricks(bricks);
 
-        while (WINDOW->getWindow()->isOpen())
+        // game loop
+        while (WINDOWMANAGER->getWindow()->isOpen())
         {
             sf::Event event;
-            while (WINDOW->getWindow()->pollEvent(event))
+            while (WINDOWMANAGER->getWindow()->pollEvent(event))
             {
                 if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
                 {
-                    WINDOW->closeWindow();
+                    WINDOWMANAGER->closeWindow();
                     break;
                 }
                 if (event.type == sf::Event::Closed)
                 {
-                    WINDOW->closeWindow();
+                    WINDOWMANAGER->closeWindow();
                     break;
                 }
             }
             TIME->Update();
+            WINDOWMANAGER->getWindow()->clear();
+            ball.Update();
             paddle.Update();
-            for (unsigned int i = 0; i < 25; i++)
+            for (unsigned int i = 0; i < bricks.size(); i++)
             {
                 bricks[i]->Update();
             }
-            ball.Update();
-            WINDOW->getWindow()->clear();
-            if (ball.getSprite().getGlobalBounds().top >= WINDOW->getSize().y)
+            if (ball.getSprite().getGlobalBounds().top >= WINDOWMANAGER->getSize().y)
             {
-                WINDOW->getWindow()->draw(text);
+                WINDOWMANAGER->getWindow()->draw(text);
             }
-            WINDOW->getWindow()->draw(paddle.getSprite());
-            WINDOW->getWindow()->draw(ball.getSprite());
-            for (unsigned int i = 0; i < 25; i++)
-            {
-                if (bricks[i]->getVisible())
-                {
-                    WINDOW->getWindow()->draw(bricks[i]->getSprite());
-                }
-            }
-            WINDOW->getWindow()->display();
+            WINDOWMANAGER->getWindow()->display();
         }
     }
 };

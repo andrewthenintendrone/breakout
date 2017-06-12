@@ -1,21 +1,21 @@
 #include "WindowManager.h"
 
-// creates the render window
+// creates the render Window
 void WindowManager::createWindow(sf::VideoMode videoMode, sf::String title)
 {
-    if (m_window)
+    if (m_Window)
     {
-        delete(m_window);
+        delete(m_Window);
     }
-    m_window = new sf::RenderWindow(videoMode, title);
+    m_Window = new sf::RenderWindow(videoMode, title);
 }
 
-// destroys the window and closes
+// destroys the Window and closes
 void WindowManager::closeWindow()
 {
-    if (m_window)
+    if (m_Window)
     {
-        m_window->close();
+        m_Window->close();
     }
 }
 
@@ -26,20 +26,20 @@ WindowManager* WindowManager::getInstance()
     return &instance;
 }
 
-// sets the window
-void WindowManager::setWindow(sf::RenderWindow* window)
+// sets the Window
+void WindowManager::setWindow(sf::RenderWindow* Window)
 {
-    m_window = window;
+    m_Window = Window;
 }
 
-// returns the window
+// returns the Window
 sf::RenderWindow* WindowManager::getWindow()
 {
-    return m_window;
+    return m_Window;
 }
 
-// returns the size of the window as a sf::Vector2u
+// returns the size of the Window as a sf::Vector2u
 sf::Vector2u WindowManager::getSize()
 {
-    return m_window->getSize();
+    return m_Window->getSize();
 }

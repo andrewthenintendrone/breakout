@@ -92,5 +92,8 @@
     <ClInclude Include="source\GameStateManager.h">
       <Filter>Source Files\State</Filter>
     </ClInclude>
+    <ClInclude Include="source\AudioManager.h">
+      <Filter>Source Files\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

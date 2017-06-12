@@ -54,6 +54,7 @@ void GameObject::updateTransform()
     m_sprite->setPosition(transform.m_position);
     m_sprite->setRotation(transform.m_rotation);
     m_sprite->setScale(transform.m_scale);
+    WindowManager::getInstance()->getWindow()->draw(*m_sprite);
 }
 
 void GameObject::init()

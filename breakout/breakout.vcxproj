@@ -115,6 +115,7 @@
     <ClInclude Include="source\GameStateManager.h" />
     <ClInclude Include="source\Paddle.h" />
     <ClInclude Include="source\Plane.h" />
+    <ClInclude Include="source\AudioManager.h" />
     <ClInclude Include="source\State.h" />
     <ClInclude Include="source\TimeManager.h" />
     <ClInclude Include="source\Transform.h" />

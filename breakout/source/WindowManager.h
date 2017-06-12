@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 
-#define WINDOW WindowManager::getInstance()
+#define WINDOWMANAGER WindowManager::getInstance()
 
 // singleton
 class WindowManager
@@ -16,5 +16,5 @@ public:
 
     void closeWindow();
 private:
-    sf::RenderWindow* m_window;
+    sf::RenderWindow* m_Window;
 };

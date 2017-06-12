@@ -21,7 +21,10 @@ public:
     // handles events
     void Brick::Update()
     {
-
+        if (visible)
+        {
+            updateTransform();
+        }
     }
 
     // returns true if this Brick is visible

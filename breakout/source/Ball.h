@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
+#include "Paddle.h"
 #include "Brick.h"
+#include "AudioManager.h"
 
 enum class ballStates { serving, moving };
 
@@ -29,19 +31,22 @@ public:
         if (bounds.left <= 0)
         {
             velocity.x = fabsf(velocity.x);
+            AUDIOMANAGER->playBounceSound();
         }
         // right side
-        if (bounds.left + bounds.width >= WINDOW->getSize().x)
+        if (bounds.left + bounds.width >= WindowManager::getInstance()->getSize().x)
         {
             velocity.x = -fabsf(velocity.x);
+            AUDIOMANAGER->playBounceSound();
         }
         // top
         if (bounds.top <= 0)
         {
             velocity.y = fabsf(velocity.y);
+            AUDIOMANAGER->playBounceSound();
         }
         // bottom
-        if (bounds.top + bounds.height >= WINDOW->getSize().y)
+        if (bounds.top + bounds.height >= WindowManager::getInstance()->getSize().y)
         {
 
         }
@@ -50,6 +55,7 @@ public:
         {
             // make this better
             velocity.y = -fabsf(velocity.y);
+            AUDIOMANAGER->playBounceSound();
         }
         //bricks
         for (unsigned int i = 0; i < bricks.size(); i++)
@@ -63,8 +69,10 @@ public:
             }
         }
         transform.translate(velocity * TIME->deltaTime());
-        updateTransform();
-        getSprite().setColor(sf::Color(rand() % 255, rand() % 255, rand() % 255, 255));
+        if (bounds.top <= WindowManager::getInstance()->getSize().y)
+        {
+            updateTransform();
+        }
     }
 
     void setPaddle(Paddle* newPaddle)
@@ -102,10 +110,12 @@ public:
         {
             velocity.y = -velocity.y;
         }
+
+        AUDIOMANAGER->playBounceSound();
     }
 
 private:
     std::vector<Brick*> bricks;
-    sf::Vector2f velocity = sf::Vector2f(400, 400);
+    sf::Vector2f velocity = sf::Vector2f(200, 200);
     Paddle* paddle;
 };
