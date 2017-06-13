@@ -18,14 +18,14 @@ public:
     }
 
     // handles events
-    void Paddle::Update()
+    void Update()
     {
         // left
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
             if (getSprite().getGlobalBounds().left > 0) 
             {
-                transform.translate(-600 * TIME->deltaTime(), 0);
+                getSprite().move(-600 * TIME->deltaTime(), 0);
             }
         }
         // right
@@ -33,9 +33,9 @@ public:
         {
             if ((getSprite().getGlobalBounds().left + getSprite().getGlobalBounds().width) < WINDOWMANAGER->getSize().x)
             {
-                transform.translate(600 * TIME->deltaTime(), 0);
+                getSprite().move(600 * TIME->deltaTime(), 0);
             }
         }
-        updateTransform();
+        draw();
     }
 };

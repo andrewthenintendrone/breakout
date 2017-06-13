@@ -1,7 +1,7 @@
 #include "GameObject.h"
 
 // default GameObject constructor
-GameObject::GameObject(void)
+GameObject::GameObject()
 {
     init();
 }
@@ -15,9 +15,14 @@ GameObject::GameObject(std::string& imageFileName)
 
 GameObject::~GameObject()
 {
-    // cleanup
-    if (m_texture != nullptr) { delete m_texture; }
-    if (m_sprite != nullptr) { delete m_sprite; }
+    if (m_texture)
+    {
+        delete m_texture;
+    }
+    if (m_sprite)
+    {
+        delete m_sprite;
+    }
 }
 
 // returns the address of the GameObjects sprite
@@ -31,13 +36,12 @@ void GameObject::setSprite(std::string& imageFileName)
 {
     if (m_texture->loadFromFile(imageFileName))
     {
-        m_sprite = new sf::Sprite;
         m_sprite->setTexture(*m_texture);
         m_sprite->setOrigin(m_sprite->getGlobalBounds().width / 2.0f, m_sprite->getGlobalBounds().height / 2.0f);
     }
     else
     {
-        // image load error
+        throw std::exception(std::string("Failed to load image: " + imageFileName).c_str());
     }
 }
 
@@ -49,11 +53,8 @@ void GameObject::setState(State* newState)
 }
 
 // updates how the sprite looks
-void GameObject::updateTransform()
+void GameObject::draw()
 {
-    m_sprite->setPosition(transform.m_position);
-    m_sprite->setRotation(transform.m_rotation);
-    m_sprite->setScale(transform.m_scale);
     WindowManager::getInstance()->getWindow()->draw(*m_sprite);
 }
 

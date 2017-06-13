@@ -4,26 +4,24 @@
 #include "WindowManager.h"
 #include "TimeManager.h"
 #include "FiniteStateMachine.h"
+#include <exception>
 
 class GameObject
 {
 public:
     // constructors and destructors
-    GameObject(void);
+    GameObject();
     GameObject(std::string& imageFileName);
     virtual ~GameObject();
-
-    // transform
-    Transform transform;
 
     // Sprite
     sf::Sprite& getSprite();
     void setSprite(std::string& imageFileName);
 
     void setState(State* newState);
-    void updateTransform();
+    void draw();
     void init();
-protected:
+    virtual void Update() = 0;
 private:
     sf::Texture* m_texture;
     sf::Sprite* m_sprite;

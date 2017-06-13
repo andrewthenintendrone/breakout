@@ -23,7 +23,7 @@ public:
     {
         if (visible)
         {
-            updateTransform();
+            draw();
         }
     }
 

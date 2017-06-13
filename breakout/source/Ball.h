@@ -68,10 +68,10 @@ public:
                 break;
             }
         }
-        transform.translate(velocity * TIME->deltaTime());
+        getSprite().move(velocity * TIME->deltaTime());
         if (bounds.top <= WindowManager::getInstance()->getSize().y)
         {
-            updateTransform();
+            draw();
         }
     }
 
