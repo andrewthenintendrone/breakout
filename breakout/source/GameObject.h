@@ -3,7 +3,6 @@
 #include "Transform.h"
 #include "WindowManager.h"
 #include "TimeManager.h"
-#include "FiniteStateMachine.h"
 #include <exception>
 
 class GameObject
@@ -18,12 +17,10 @@ public:
     sf::Sprite& getSprite();
     void setSprite(std::string& imageFileName);
 
-    void setState(State* newState);
     void draw();
     void init();
     virtual void Update() = 0;
 private:
     sf::Texture* m_texture;
     sf::Sprite* m_sprite;
-    State* m_state;
 };

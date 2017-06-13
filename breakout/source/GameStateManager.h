@@ -1,40 +1,83 @@
 #pragma once
 #include <vector>
-#include "GameState.h"
+#include "ServingState.h"
+#include "PlayingState.h"
+#include "PausedState.h"
+#include "WonState.h"
+#include "MenuState.h"
+
+enum class GAMESTATE { MENU, SERVING, PLAYING, PAUSED, WON };
 
 class GameStateManager
 {
 public:
-    GameStateManager(unsigned int stateCount)
+#pragma region constructors and destructors
+    GameStateManager()
     {
-        m_registeredStates.resize(stateCount);
+        fillStates();
     }
 
     ~GameStateManager()
     {
-        for (auto state : m_registeredStates) delete state;
+        for (GameState* currentGameState : allStates)
+        {
+            if (currentGameState)
+            {
+                delete currentGameState;
+            }
+        }
+    }
+#pragma endregion
+
+#pragma region state stack management
+    // adds one of each GameState type to a vector
+    void fillStates()
+    {
+        allStates.push_back(new MenuState);
+        allStates.push_back(new ServingState);
+        allStates.push_back(new PlayingState);
+        allStates.push_back(new PausedState);
+        allStates.push_back(new WonState);
     }
 
-    void registerState(int id, GameState* state);
-    void pushState(int id);
-    void popState();
-    
-    void update(float deltaTime);
-    
-    void draw();
-    
-    int activeStateCount() const { return m_stateStack.size(); }
-    GameState* getTopState() const { return m_stateStack.back(); }
-    GameState* getState(int id) const
+    // pushes a state onto the stack
+    void pushState(GAMESTATE newState)
     {
-        return m_registeredStates[id];
+        activeStates.push_back(allStates[(int)newState]);
     }
+
+    // pushes a state from the stack
+    void popState()
+    {
+        activeStates.pop_back();
+    }
+#pragma endregion
+
+#pragma region Update / Draw
+    void Update()
+    {
+        for (GameState* currentState : activeStates)
+        {
+            if (currentState != nullptr)
+            {
+                currentState->Update();
+            }
+        }
+    }
+
+    void Draw()
+    {
+        for (GameState* currentState : activeStates)
+        {
+            if (currentState != nullptr)
+            {
+                currentState->Draw();
+            }
+        }
+    }
+#pragma endregion
 
 private:
-
-    std::vector<GameState*> m_pushedStates;
-    bool m_popState = false;
-
-    std::vector<GameState*> m_stateStack;
-    std::vector<GameState*> m_registeredStates;
+    std::vector<GameState*> allStates;
+    std::vector<GameState*> activeStates;
 };

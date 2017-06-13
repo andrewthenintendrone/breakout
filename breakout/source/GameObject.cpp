@@ -45,13 +45,6 @@ void GameObject::setSprite(std::string& imageFileName)
     }
 }
 
-// sets the GameObjects State
-void GameObject::setState(State* newState)
-{
-    delete m_state;
-    m_state = newState;
-}
-
 // updates how the sprite looks
 void GameObject::draw()
 {
@@ -62,5 +55,4 @@ void GameObject::init()
 {
     m_texture = new sf::Texture;
     m_sprite = new sf::Sprite;
-    m_state = nullptr;
 }

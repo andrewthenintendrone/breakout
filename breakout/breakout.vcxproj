@@ -97,7 +97,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\GameObject.cpp" />
-    <ClCompile Include="source\GameStateManager.cpp" />
     <ClCompile Include="source\TimeManager.cpp" />
     <ClCompile Include="source\Transform.cpp" />
     <ClCompile Include="source\WindowManager.cpp" />
@@ -105,22 +104,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Ball.h" />
-    <ClInclude Include="source\BallStates.h" />
     <ClInclude Include="source\Brick.h" />
-    <ClInclude Include="source\Condition.h" />
-    <ClInclude Include="source\FiniteStateMachine.h" />
     <ClInclude Include="source\GameObject.h" />
-    <ClInclude Include="source\GameManager.h" />
+    <ClInclude Include="source\Game.h" />
     <ClInclude Include="source\GameState.h" />
     <ClInclude Include="source\GameStateManager.h" />
+    <ClInclude Include="source\MenuState.h" />
     <ClInclude Include="source\Paddle.h" />
+    <ClInclude Include="source\PausedState.h" />
     <ClInclude Include="source\Plane.h" />
     <ClInclude Include="source\AudioManager.h" />
-    <ClInclude Include="source\State.h" />
+    <ClInclude Include="source\PlayingState.h" />
+    <ClInclude Include="source\ServingState.h" />
     <ClInclude Include="source\TimeManager.h" />
     <ClInclude Include="source\Transform.h" />
     <ClInclude Include="source\VectorMath.h" />
     <ClInclude Include="source\WindowManager.h" />
+    <ClInclude Include="source\WonState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

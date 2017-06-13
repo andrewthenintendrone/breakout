@@ -7,8 +7,8 @@ class AudioManager
 public:
     static AudioManager* getInstance()
     {
-        static AudioManager gsm;
-        return &gsm;
+        static AudioManager audioManager;
+        return &audioManager;
     }
 
     // plays the music on loop
