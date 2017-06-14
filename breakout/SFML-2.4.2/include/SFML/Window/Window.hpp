@@ -208,7 +208,7 @@ public:
     /// \see waitEvent
     ///
     ////////////////////////////////////////////////////////////
-    bool pollEvent(Event& event);
+    bool pollEvent(Event& currentEvent);
 
     ////////////////////////////////////////////////////////////
     /// \brief Wait for an event and return it
@@ -235,7 +235,7 @@ public:
     /// \see pollEvent
     ///
     ////////////////////////////////////////////////////////////
-    bool waitEvent(Event& event);
+    bool waitEvent(Event& currentEvent);
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the position of the window
@@ -511,7 +511,7 @@ private:
     /// \param event Event to filter
     ///
     ////////////////////////////////////////////////////////////
-    bool filterEvent(const Event& event);
+    bool filterEvent(const Event& currentEvent);
 
     ////////////////////////////////////////////////////////////
     /// \brief Perform some common internal initializations

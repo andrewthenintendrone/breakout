@@ -15,6 +15,7 @@ std::string GameManager::getPath()
     return std::string(buffer).substr(0, pos);
 }
 
+// loads all resources and generaly sets up
 void GameManager::init()
 {
     try
@@ -97,6 +98,8 @@ void GameManager::init()
 }
 
 #pragma region update functions
+
+// update while at the menu
 void GameManager::updateMenu()
 {
     WINDOWMANAGER->getWindow()->draw(menuTextBreakOut);
@@ -112,8 +115,7 @@ void GameManager::updateMenu()
 
         if (mouseRect.intersects(menuTextPlay.getGlobalBounds()))
         {
-            STATEMANAGER->popState(); // pop menu state
-            STATEMANAGER->pushState(STATE::SERVING);
+            STATEMANAGER->changeState(STATE::SERVING);
             AUDIOMANAGER->playMusic();
         }
         else if (mouseRect.intersects(menuTextExit.getGlobalBounds()))
@@ -124,12 +126,12 @@ void GameManager::updateMenu()
     // enter starts the game
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
     {
-        STATEMANAGER->popState(); // pop menu state
-        STATEMANAGER->pushState(STATE::SERVING); // push serving state
+        STATEMANAGER->changeState(STATE::SERVING);
         AUDIOMANAGER->playMusic();
     }
 }
 
+// update while serving
 void GameManager::updateServing()
 {
     ball.Serve();
@@ -144,11 +146,31 @@ void GameManager::updateServing()
     // check for player's serve
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        STATEMANAGER->popState(); // pop serving state
-        STATEMANAGER->pushState(STATE::PLAYING); // push playing state
+        STATEMANAGER->changeState(STATE::PLAYING); // push playing state
     }
 }
 
+// update while thye game is paused
+void GameManager::updatePaused()
+{
+    ball.draw();
+    paddle.draw();
+    for (unsigned int i = 0; i < bricks.size(); i = !~i)
+    {
+        if (bricks[i]->getVisible())
+        {
+            bricks[i]->draw();
+        }
+    }
+    // unpause
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+    {
+        AUDIOMANAGER->playMusic();
+        STATEMANAGER->changeState(STATE::PLAYING);
+    }
+}
+
+// update while playing the game
 void GameManager::updatePlaying()
 {
     ball.Move();
@@ -165,26 +187,35 @@ void GameManager::updatePlaying()
     // check if player has won
     if (hasWon)
     {
-        AUDIOMANAGER->stopMusic();
+        AUDIOMANAGER->stopMusic(); // stop playing music
         AUDIOMANAGER->playScarySound(); // scary
-        STATEMANAGER->popState(); // pop playing state
-        STATEMANAGER->pushState(STATE::WON); // push won state
+        STATEMANAGER->changeState(STATE::WON);
     }
     // ball has gone off bottom
     if (ball.getSprite().getPosition().y > WINDOWMANAGER->getSize().y)
     {
-        STATEMANAGER->popState(); // pop playing state
-        STATEMANAGER->pushState(STATE::SERVING); // push serving state
+        STATEMANAGER->changeState(STATE::SERVING);
+    }
+    // pause
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+    {
+        AUDIOMANAGER->pauseMusic();
+        STATEMANAGER->changeState(STATE::PAUSED);
     }
 }
 
-void GameManager::updatePaused()
-{
-
-}
-
+// update after the player has won
 void GameManager::updateWon()
 {
     WINDOWMANAGER->getWindow()->draw(scarySprite);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+    {
+        for (unsigned int i = 0; i < bricks.size(); i++)
+        {
+            bricks[i]->setVisible(true);
+        }
+        STATEMANAGER->changeState(STATE::MENU); // push menu state
+    }
 }
+
 #pragma endregion

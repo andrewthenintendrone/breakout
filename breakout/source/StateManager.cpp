@@ -19,44 +19,31 @@ StateManager::~StateManager()
 }
 #pragma endregion
 
-#pragma region state stack management
-
-// pushes a state onto the stack
-void StateManager::pushState(STATE newState)
+void StateManager::changeState(STATE newState)
 {
-    currentStates.push_back(newState);
+    currentState = newState;
 }
-
-// pushes a state from the stack
-void StateManager::popState()
-{
-    currentStates.pop_back();
-}
-#pragma endregion
 
 void StateManager::update()
 {
-    for (unsigned int i = 0; i < currentStates.size(); i++)
+    switch (currentState)
     {
-        switch (currentStates[i])
-        {
-        case STATE::MENU:
-            GAMEMANAGER->updateMenu();
-            break;
-        case STATE::SERVING:
-            GAMEMANAGER->updateServing();
-            break;
-        case STATE::PLAYING:
-            GAMEMANAGER->updatePlaying();
-            break;
-        case STATE::PAUSED:
-            GAMEMANAGER->updatePaused();
-            break;
-        case STATE::WON:
-            GAMEMANAGER->updateWon();
-            break;
-        default:
-            break;
-        }
+    case STATE::MENU:
+        GAMEMANAGER->updateMenu();
+        break;
+    case STATE::SERVING:
+        GAMEMANAGER->updateServing();
+        break;
+    case STATE::PAUSED:
+        GAMEMANAGER->updatePaused();
+        break;
+    case STATE::PLAYING:
+        GAMEMANAGER->updatePlaying();
+        break;
+    case STATE::WON:
+        GAMEMANAGER->updateWon();
+        break;
+    default:
+        break;
     }
 }

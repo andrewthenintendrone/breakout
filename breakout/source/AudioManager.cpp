@@ -59,6 +59,15 @@ void AudioManager::playMusic()
     }
 }
 
+// pauses the music
+void AudioManager::pauseMusic()
+{
+    if (m_music != nullptr)
+    {
+        m_music->pause();
+    }
+}
+
 // stops the music
 void AudioManager::stopMusic()
 {

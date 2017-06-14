@@ -14,6 +14,7 @@ public:
     void setBounceSound(std::string& soundFileName);
     void setScarySound(std::string& soundFileName);
     void playMusic();
+    void pauseMusic();
     void stopMusic();
     void playBounceSound();
     void playScarySound();

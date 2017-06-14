@@ -19,8 +19,8 @@ public:
 
     void updateMenu();
     void updateServing();
-    void updatePlaying();
     void updatePaused();
+    void updatePlaying();
     void updateWon();
 
 private:

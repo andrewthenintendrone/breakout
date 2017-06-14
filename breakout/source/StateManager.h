@@ -3,7 +3,7 @@
 
 #define STATEMANAGER StateManager::getInstance()
 
-enum class STATE { MENU, SERVING, PLAYING, PAUSED, WON };
+enum class STATE { MENU, SERVING, PAUSED, PLAYING, WON };
 
 class StateManager
 {
@@ -13,12 +13,10 @@ public:
     StateManager();
     ~StateManager();
 
-    // state stack management
-    void pushState(STATE newState);
-    void popState();
+    void changeState(STATE newState);
 
     void update();
 
 private:
-    std::vector<STATE> currentStates;
+    STATE currentState;
 };

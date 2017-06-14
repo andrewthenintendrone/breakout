@@ -5,11 +5,11 @@
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine, int cmdShow)
 {
-    STATEMANAGER->pushState(STATE::MENU);
+    STATEMANAGER->changeState(STATE::MENU);
     GAMEMANAGER->init();
+    sf::Event event;
     while (WINDOWMANAGER->getWindow()->isOpen())
     {
-        sf::Event event;
         while (WINDOWMANAGER->getWindow()->pollEvent(event))
         {
             if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
@@ -28,5 +28,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
         STATEMANAGER->update();
         WINDOWMANAGER->getWindow()->display();
     }
+
     return 0;
 }
