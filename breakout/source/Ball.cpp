@@ -26,25 +26,19 @@ void Ball::Move()
     // right side
     if (bounds.left + bounds.width >= WindowManager::getInstance()->getSize().x)
     {
-        velocity.x = -fabsf(velocity.x) + rand() % 10 - 5;
+        velocity.x = -fabsf(velocity.x);
         AUDIOMANAGER->playBounceSound();
     }
     // top
     if (bounds.top <= 0)
     {
-        velocity.y = fabsf(velocity.y) + rand() % 10 - 5;
+        velocity.y = fabsf(velocity.y);
         AUDIOMANAGER->playBounceSound();
-    }
-    // bottom
-    if (bounds.top + bounds.height >= WindowManager::getInstance()->getSize().y)
-    {
-
     }
     // paddle
     if (bounds.intersects(paddle->getSprite().getGlobalBounds()))
     {
-        // make this better
-        velocity.y = -fabsf(velocity.y) + rand() % 10 - 5;
+        velocity.y = -fabsf(velocity.y);
         AUDIOMANAGER->playBounceSound();
     }
     //bricks
@@ -59,15 +53,13 @@ void Ball::Move()
         }
     }
     getSprite().move(velocity * TIME->deltaTime());
-    if (bounds.top <= WindowManager::getInstance()->getSize().y)
-    {
-        draw();
-    }
+    draw();
 }
 
 void Ball::Serve()
 {
-
+    getSprite().setPosition(paddle->getSprite().getPosition() - sf::Vector2f(0, paddle->getSprite().getGlobalBounds().height + 10));
+    draw();
 }
 
 void Ball::setPaddle(Paddle* newPaddle)
@@ -87,22 +79,22 @@ void Ball::bounce(sf::FloatRect hitRect)
     // hit from left
     if (myPosition.x < hitRect.left)
     {
-        velocity.x = -velocity.x + rand() % 10 - 5;
+        velocity.x = -velocity.x;
     }
     // hit from above
     else if (myPosition.y < hitRect.top)
     {
-        velocity.y = -velocity.y + rand() % 10 - 5;
+        velocity.y = -velocity.y;
     }
     // hit from right
     if (myPosition.x > hitRect.left + hitRect.width)
     {
-        velocity.x = -velocity.x + rand() % 10 - 5;
+        velocity.x = -velocity.x;
     }
     // hit from below
     else if (myPosition.y > hitRect.top + hitRect.height)
     {
-        velocity.y = -velocity.y + rand() % 10 - 5;
+        velocity.y = -velocity.y;
     }
 
     AUDIOMANAGER->playBounceSound();

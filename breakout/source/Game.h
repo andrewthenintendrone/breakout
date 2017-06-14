@@ -31,5 +31,7 @@ private:
     sf::Text menuTextPlay;
     sf::Text menuTextExit;
     sf::Texture brickTex;
+    sf::Texture scaryTex;
+    sf::Sprite scarySprite;
     sf::Font font;
 };

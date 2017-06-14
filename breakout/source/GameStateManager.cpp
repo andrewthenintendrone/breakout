@@ -36,7 +36,7 @@ void GameStateManager::popState()
 
 void GameStateManager::Update()
 {
-    for (int i = 0; i < currentGameStates.size(); i++)
+    for (unsigned int i = 0; i < currentGameStates.size(); i++)
     {
         switch (currentGameStates[i])
         {
