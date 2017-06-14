@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include "Transform.h"
 #include "WindowManager.h"
 #include "TimeManager.h"
 #include <exception>
@@ -19,7 +18,6 @@ public:
 
     void draw();
     void init();
-    virtual void Update() = 0;
 private:
     sf::Texture* m_texture;
     sf::Sprite* m_sprite;

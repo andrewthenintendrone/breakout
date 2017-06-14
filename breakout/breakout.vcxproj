@@ -61,6 +61,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>SFML_STATIC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\SFML-2.4.2\include\</AdditionalIncludeDirectories>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -71,6 +72,9 @@
     <PostBuildEvent>
       <Command>call copyresources.bat</Command>
     </PostBuildEvent>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -96,9 +100,14 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\AudioManager.cpp" />
+    <ClCompile Include="source\Ball.cpp" />
+    <ClCompile Include="source\Brick.cpp" />
+    <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
+    <ClCompile Include="source\GameStateManager.cpp" />
+    <ClCompile Include="source\Paddle.cpp" />
     <ClCompile Include="source\TimeManager.cpp" />
-    <ClCompile Include="source\Transform.cpp" />
     <ClCompile Include="source\WindowManager.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
   </ItemGroup>
@@ -109,18 +118,14 @@
     <ClInclude Include="source\Game.h" />
     <ClInclude Include="source\GameState.h" />
     <ClInclude Include="source\GameStateManager.h" />
-    <ClInclude Include="source\MenuState.h" />
     <ClInclude Include="source\Paddle.h" />
-    <ClInclude Include="source\PausedState.h" />
     <ClInclude Include="source\Plane.h" />
     <ClInclude Include="source\AudioManager.h" />
-    <ClInclude Include="source\PlayingState.h" />
-    <ClInclude Include="source\ServingState.h" />
     <ClInclude Include="source\TimeManager.h" />
-    <ClInclude Include="source\Transform.h" />
-    <ClInclude Include="source\VectorMath.h" />
     <ClInclude Include="source\WindowManager.h" />
-    <ClInclude Include="source\WonState.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML\Graphics.hpp>
+#include <string>
 
 #define WINDOWMANAGER WindowManager::getInstance()
 
