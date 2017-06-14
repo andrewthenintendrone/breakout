@@ -52,7 +52,7 @@ void Ball::Move()
             break;
         }
     }
-    getSprite().move(velocity * TIME->deltaTime());
+    getSprite().move(velocity * TIMEMANAGER->deltaTime());
     draw();
 }
 

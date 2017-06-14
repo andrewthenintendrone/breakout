@@ -14,7 +14,7 @@ float TimeManager::deltaTime()
 }
 
 // updates m_deltaTime
-void TimeManager::Update()
+void TimeManager::update()
 {
     m_deltaTime = m_clock.getElapsedTime().asSeconds();
     m_clock.restart();

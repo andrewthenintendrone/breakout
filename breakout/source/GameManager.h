@@ -6,22 +6,22 @@
 #include "Paddle.h"
 #include "Ball.h"
 #include "Brick.h"
-#include "GameStateManager.h"
+#include "stateManager.h"
 
-#define GAME Game::getInstance()
+#define GAMEMANAGER GameManager::getInstance()
 
-class Game
+class GameManager
 {
 public:
-    static Game* getInstance();
+    static GameManager* getInstance();
     std::string getPath();
     void init();
 
-    void UpdateMenu();
-    void UpdateServing();
-    void UpdatePlaying();
-    void UpdatePaused();
-    void UpdateWon();
+    void updateMenu();
+    void updateServing();
+    void updatePlaying();
+    void updatePaused();
+    void updateWon();
 
 private:
     Ball ball;

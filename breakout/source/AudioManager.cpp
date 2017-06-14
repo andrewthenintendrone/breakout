@@ -2,8 +2,8 @@
 
 AudioManager* AudioManager::getInstance()
 {
-    static AudioManager audioManager;
-    return &audioManager;
+    static AudioManager instance;
+    return &instance;
 }
 
 AudioManager::AudioManager()

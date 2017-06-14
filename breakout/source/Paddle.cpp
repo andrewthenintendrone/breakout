@@ -21,7 +21,7 @@ void Paddle::Control()
     {
         if (getSprite().getGlobalBounds().left > 0)
         {
-            getSprite().move(-600 * TIME->deltaTime(), 0);
+            getSprite().move(-600 * TIMEMANAGER->deltaTime(), 0);
         }
     }
     // right
@@ -29,7 +29,7 @@ void Paddle::Control()
     {
         if ((getSprite().getGlobalBounds().left + getSprite().getGlobalBounds().width) < WINDOWMANAGER->getSize().x)
         {
-            getSprite().move(600 * TIME->deltaTime(), 0);
+            getSprite().move(600 * TIMEMANAGER->deltaTime(), 0);
         }
     }
     draw();

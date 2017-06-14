@@ -1,13 +1,13 @@
-#include "Game.h"
+#include "GameManager.h"
 
-Game* Game::getInstance()
+GameManager* GameManager::getInstance()
 {
-    static Game game;
-    return &game;
+    static GameManager instance;
+    return &instance;
 }
 
 // returns path to the executable
-std::string Game::getPath()
+std::string GameManager::getPath()
 {
     char buffer[MAX_PATH];
     GetModuleFileName(NULL, buffer, MAX_PATH);
@@ -15,7 +15,7 @@ std::string Game::getPath()
     return std::string(buffer).substr(0, pos);
 }
 
-void Game::init()
+void GameManager::init()
 {
     try
     {
@@ -96,7 +96,8 @@ void Game::init()
     }
 }
 
-void Game::UpdateMenu()
+#pragma region update functions
+void GameManager::updateMenu()
 {
     WINDOWMANAGER->getWindow()->draw(menuTextBreakOut);
     WINDOWMANAGER->getWindow()->draw(menuTextPlay);
@@ -111,8 +112,8 @@ void Game::UpdateMenu()
 
         if (mouseRect.intersects(menuTextPlay.getGlobalBounds()))
         {
-            GAMESTATEMANAGER->popState(); // pop menu state
-            GAMESTATEMANAGER->pushState(GAMESTATE::SERVING);
+            STATEMANAGER->popState(); // pop menu state
+            STATEMANAGER->pushState(STATE::SERVING);
             AUDIOMANAGER->playMusic();
         }
         else if (mouseRect.intersects(menuTextExit.getGlobalBounds()))
@@ -123,13 +124,13 @@ void Game::UpdateMenu()
     // enter starts the game
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
     {
-        GAMESTATEMANAGER->popState(); // pop menu state
-        GAMESTATEMANAGER->pushState(GAMESTATE::SERVING); // push serving state
+        STATEMANAGER->popState(); // pop menu state
+        STATEMANAGER->pushState(STATE::SERVING); // push serving state
         AUDIOMANAGER->playMusic();
     }
 }
 
-void Game::UpdateServing()
+void GameManager::updateServing()
 {
     ball.Serve();
     paddle.Control();
@@ -143,12 +144,12 @@ void Game::UpdateServing()
     // check for player's serve
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        GAMESTATEMANAGER->popState(); // pop serving state
-        GAMESTATEMANAGER->pushState(GAMESTATE::PLAYING); // push playing state
+        STATEMANAGER->popState(); // pop serving state
+        STATEMANAGER->pushState(STATE::PLAYING); // push playing state
     }
 }
 
-void Game::UpdatePlaying()
+void GameManager::updatePlaying()
 {
     ball.Move();
     paddle.Control();
@@ -166,23 +167,24 @@ void Game::UpdatePlaying()
     {
         AUDIOMANAGER->stopMusic();
         AUDIOMANAGER->playScarySound(); // scary
-        GAMESTATEMANAGER->popState(); // pop playing state
-        GAMESTATEMANAGER->pushState(GAMESTATE::WON); // push won state
+        STATEMANAGER->popState(); // pop playing state
+        STATEMANAGER->pushState(STATE::WON); // push won state
     }
     // ball has gone off bottom
     if (ball.getSprite().getPosition().y > WINDOWMANAGER->getSize().y)
     {
-        GAMESTATEMANAGER->popState(); // pop playing state
-        GAMESTATEMANAGER->pushState(GAMESTATE::SERVING); // push serving state
+        STATEMANAGER->popState(); // pop playing state
+        STATEMANAGER->pushState(STATE::SERVING); // push serving state
     }
 }
 
-void Game::UpdatePaused()
+void GameManager::updatePaused()
 {
 
 }
 
-void Game::UpdateWon()
+void GameManager::updateWon()
 {
     WINDOWMANAGER->getWindow()->draw(scarySprite);
 }
+#pragma endregion

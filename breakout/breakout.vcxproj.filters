@@ -19,31 +19,10 @@
     <Filter Include="Source Files\Managers">
       <UniqueIdentifier>{33c7f384-8eaa-426a-93a3-f923b88d872c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\State">
-      <UniqueIdentifier>{d413a95a-1b0e-4e17-a4b1-c9b8a2d496fb}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\WinMain.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\TimeManager.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="source\WindowManager.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="source\AudioManager.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="source\GameStateManager.cpp">
-      <Filter>Source Files\State</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Game.cpp">
-      <Filter>Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="source\Ball.cpp">
       <Filter>Source Files\GameObjects</Filter>
@@ -54,11 +33,26 @@
     <ClCompile Include="source\Brick.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="source\GameObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AudioManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GameManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="source\StateManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="source\WindowManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TimeManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\GameObject.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\Ball.h">
       <Filter>Source Files\GameObjects</Filter>
     </ClInclude>
@@ -71,26 +65,23 @@
     <ClInclude Include="source\Plane.h">
       <Filter>Source Files\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="source\GameObject.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AudioManager.h">
+      <Filter>Source Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GameManager.h">
+      <Filter>Source Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="source\StateManager.h">
+      <Filter>Source Files\Managers</Filter>
+    </ClInclude>
     <ClInclude Include="source\TimeManager.h">
       <Filter>Source Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="source\WindowManager.h">
       <Filter>Source Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="source\AudioManager.h">
-      <Filter>Source Files\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GameState.h">
-      <Filter>Source Files\State</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GameStateManager.h">
-      <Filter>Source Files\State</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Game.h">
-      <Filter>Source Files\Managers</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

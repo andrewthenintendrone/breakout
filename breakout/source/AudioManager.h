@@ -19,9 +19,14 @@ public:
     void playScarySound();
 
 private:
+    // game music
     sf::Music* m_music;
+
+    // ball bounce sound effect
     sf::SoundBuffer* m_bounceSoundBuffer;
     sf::Sound* m_bounceSound;
+
+    // scary sound effect
     sf::SoundBuffer* m_scaryBuffer;
     sf::Sound* m_scarySound;
 };

@@ -1,12 +1,12 @@
-#include "Game.h"
-#include "GameStateManager.h"
-#include "WindowManager.h"
-#include "TimeManager.h"
+#include "gameManager.h"
+#include "stateManager.h"
+#include "windowManager.h"
+#include "timeManager.h"
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine, int cmdShow)
 {
-    GAMESTATEMANAGER->pushState(GAMESTATE::MENU);
-    GAME->init();
+    STATEMANAGER->pushState(STATE::MENU);
+    GAMEMANAGER->init();
     while (WINDOWMANAGER->getWindow()->isOpen())
     {
         sf::Event event;
@@ -23,9 +23,9 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
                 break;
             }
         }
-        TIME->Update();
+        TIMEMANAGER->update();
         WINDOWMANAGER->getWindow()->clear();
-        GAMESTATEMANAGER->Update();
+        STATEMANAGER->update();
         WINDOWMANAGER->getWindow()->display();
     }
     return 0;

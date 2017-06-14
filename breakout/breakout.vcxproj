@@ -103,9 +103,9 @@
     <ClCompile Include="source\AudioManager.cpp" />
     <ClCompile Include="source\Ball.cpp" />
     <ClCompile Include="source\Brick.cpp" />
-    <ClCompile Include="source\Game.cpp" />
+    <ClCompile Include="source\GameManager.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
-    <ClCompile Include="source\GameStateManager.cpp" />
+    <ClCompile Include="source\StateManager.cpp" />
     <ClCompile Include="source\Paddle.cpp" />
     <ClCompile Include="source\TimeManager.cpp" />
     <ClCompile Include="source\WindowManager.cpp" />
@@ -115,17 +115,13 @@
     <ClInclude Include="source\Ball.h" />
     <ClInclude Include="source\Brick.h" />
     <ClInclude Include="source\GameObject.h" />
-    <ClInclude Include="source\Game.h" />
-    <ClInclude Include="source\GameState.h" />
-    <ClInclude Include="source\GameStateManager.h" />
+    <ClInclude Include="source\GameManager.h" />
+    <ClInclude Include="source\StateManager.h" />
     <ClInclude Include="source\Paddle.h" />
     <ClInclude Include="source\Plane.h" />
     <ClInclude Include="source\AudioManager.h" />
     <ClInclude Include="source\TimeManager.h" />
     <ClInclude Include="source\WindowManager.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
