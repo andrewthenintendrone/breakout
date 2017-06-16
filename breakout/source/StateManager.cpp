@@ -34,11 +34,11 @@ void StateManager::update()
     case STATE::SERVING:
         GAMEMANAGER->updateServing();
         break;
-    case STATE::PAUSED:
-        GAMEMANAGER->updatePaused();
-        break;
     case STATE::PLAYING:
         GAMEMANAGER->updatePlaying();
+        break;
+    case STATE::PAUSED:
+        GAMEMANAGER->updatePaused();
         break;
     case STATE::WON:
         GAMEMANAGER->updateWon();

@@ -1,4 +1,6 @@
 #include "GameManager.h"
+#include "InputManager.h"
+#include "TextManager.h"
 
 GameManager* GameManager::getInstance()
 {
@@ -36,31 +38,19 @@ void GameManager::init()
         AUDIOMANAGER->setScarySound(getPath() + "\\resources\\audio\\scary.wav");
 #pragma endregion
 
-        // load font
-        font.loadFromFile(getPath() + "\\resources\\font\\OCRAEXT.ttf");
+        // initialise text manager
+        TEXTMANAGER->init((getPath() + "\\resources\\font\\OCRAEXT.ttf"));
 
         // set up menu text
+        TEXTMANAGER->addText(std::string("Scary Break Out"), 100, sf::Vector2f(100, 0), sf::Color(128, 0, 255));
+        TEXTMANAGER->addText(std::string("Play (enter)"), 50, sf::Vector2f(300, 300), sf::Color(128, 0, 255));
+        TEXTMANAGER->addText(std::string("Exit (esc)"), 50, sf::Vector2f(300, 400), sf::Color(128, 0, 255));
 
-        menuTextBreakOut.setFont(font);
-        menuTextBreakOut.setString("Break Out");
-        menuTextBreakOut.setCharacterSize(150);
-        menuTextBreakOut.setFillColor(sf::Color(128, 0, 255, 255));
-        menuTextBreakOut.setPosition(100, 0);
+        // tutorial text
+        TEXTMANAGER->addText(std::string("Press Space to serve"), 50, sf::Vector2f(0, 0), sf::Color(128, 0, 255));
 
-        menuTextPlay.setFont(font);
-        menuTextPlay.setString("Play");
-        menuTextPlay.setCharacterSize(50);
-        menuTextPlay.setFillColor(sf::Color(128, 0, 255, 255));
-        menuTextPlay.setPosition(300, 300);
-
-        menuTextExit.setFont(font);
-        menuTextExit.setString("Exit");
-        menuTextExit.setCharacterSize(50);
-        menuTextExit.setFillColor(sf::Color(128, 0, 255, 255));
-        menuTextExit.setPosition(300, 400);
-
-        // start with 0 points
-        unsigned int points = 0;
+        // scary text
+        TEXTMANAGER->addText(std::string("I told you it was scary"), 50, sf::Vector2f(0, 0), sf::Color(255, 0, 0));
 
         // create paddle
         paddle.setSprite(getPath() + "\\resources\\graphics\\paddle.png");
@@ -102,29 +92,28 @@ void GameManager::init()
 // update while at the menu
 void GameManager::updateMenu()
 {
-    WINDOWMANAGER->getWindow()->draw(menuTextBreakOut);
-    WINDOWMANAGER->getWindow()->draw(menuTextPlay);
-    WINDOWMANAGER->getWindow()->draw(menuTextExit);
+    WINDOWMANAGER->getWindow()->draw(*TEXTMANAGER->getText(std::string("Scary Break Out")));
+    WINDOWMANAGER->getWindow()->draw(*TEXTMANAGER->getText(std::string("Play (enter)")));
+    WINDOWMANAGER->getWindow()->draw(*TEXTMANAGER->getText(std::string("Exit (esc)")));
 
-    // Left Click
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    if (INPUTMANAGER->mouseButtonPressed(sf::Mouse::Left))
     {
-        // get global mouse position
-        sf::Vector2i position = sf::Mouse::getPosition(*WINDOWMANAGER->getWindow());
-        sf::FloatRect mouseRect((float)position.x, (float)position.y, 2, 2);
-
-        if (mouseRect.intersects(menuTextPlay.getGlobalBounds()))
+        if (TEXTMANAGER->getText(std::string("Scary Break Out"))->getGlobalBounds().contains(INPUTMANAGER->mousePosition()))
+        {
+            TEXTMANAGER->getText(std::string("Scary Break Out"))->setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255));
+        }
+        if (TEXTMANAGER->getText(std::string("Play (enter)"))->getGlobalBounds().contains(INPUTMANAGER->mousePosition()))
         {
             STATEMANAGER->changeState(STATE::SERVING);
             AUDIOMANAGER->playMusic();
         }
-        else if (mouseRect.intersects(menuTextExit.getGlobalBounds()))
+        else if (TEXTMANAGER->getText(std::string("Exit (esc)"))->getGlobalBounds().contains(INPUTMANAGER->mousePosition()))
         {
             WINDOWMANAGER->closeWindow();
         }
     }
     // enter starts the game
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+    if (INPUTMANAGER->keyPressed(sf::Keyboard::Return))
     {
         STATEMANAGER->changeState(STATE::SERVING);
         AUDIOMANAGER->playMusic();
@@ -134,6 +123,7 @@ void GameManager::updateMenu()
 // update while serving
 void GameManager::updateServing()
 {
+    WINDOWMANAGER->getWindow()->draw(*TEXTMANAGER->getText(std::string("Press Space to serve")));
     ball.Serve();
     paddle.Control();
     for (unsigned int i = 0; i < bricks.size(); i++)
@@ -144,7 +134,7 @@ void GameManager::updateServing()
         }
     }
     // check for player's serve
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if(INPUTMANAGER->keyPressed(sf::Keyboard::Key::Space))
     {
         STATEMANAGER->changeState(STATE::PLAYING); // push playing state
     }
@@ -155,7 +145,7 @@ void GameManager::updatePaused()
 {
     ball.draw();
     paddle.draw();
-    for (unsigned int i = 0; i < bricks.size(); i = !~i)
+    for (unsigned int i = 0; i < bricks.size(); i++)
     {
         if (bricks[i]->getVisible())
         {
@@ -163,7 +153,7 @@ void GameManager::updatePaused()
         }
     }
     // unpause
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+    if(INPUTMANAGER->keyPressed(sf::Keyboard::Return))
     {
         AUDIOMANAGER->playMusic();
         STATEMANAGER->changeState(STATE::PLAYING);
@@ -194,10 +184,14 @@ void GameManager::updatePlaying()
     // ball has gone off bottom
     if (ball.getSprite().getPosition().y > WINDOWMANAGER->getSize().y)
     {
+        for (unsigned int i = 0; i < bricks.size(); i++)
+        {
+            bricks[i]->setVisible(true);
+        }
         STATEMANAGER->changeState(STATE::SERVING);
     }
     // pause
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+    if(INPUTMANAGER->keyPressed(sf::Keyboard::Return))
     {
         AUDIOMANAGER->pauseMusic();
         STATEMANAGER->changeState(STATE::PAUSED);
@@ -208,7 +202,8 @@ void GameManager::updatePlaying()
 void GameManager::updateWon()
 {
     WINDOWMANAGER->getWindow()->draw(scarySprite);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+    WINDOWMANAGER->getWindow()->draw(*TEXTMANAGER->getText(std::string("I told you it was scary")));
+    if(INPUTMANAGER->keyPressed(sf::Keyboard::Return))
     {
         for (unsigned int i = 0; i < bricks.size(); i++)
         {

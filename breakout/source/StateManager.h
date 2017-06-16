@@ -3,7 +3,7 @@
 
 #define STATEMANAGER StateManager::getInstance()
 
-enum class STATE { MENU, SERVING, PAUSED, PLAYING, WON };
+enum class STATE { MENU, SERVING, PLAYING, PAUSED, WON };
 
 class StateManager
 {

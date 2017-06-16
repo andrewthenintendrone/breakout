@@ -27,11 +27,7 @@ private:
     Ball ball;
     Paddle paddle;
     std::vector<Brick*> bricks;
-    sf::Text menuTextBreakOut;
-    sf::Text menuTextPlay;
-    sf::Text menuTextExit;
     sf::Texture brickTex;
     sf::Texture scaryTex;
     sf::Sprite scarySprite;
-    sf::Font font;
 };

@@ -7,7 +7,7 @@ void WindowManager::createWindow(sf::VideoMode videoMode, sf::String title)
     {
         delete(m_Window);
     }
-    m_Window = new sf::RenderWindow(videoMode, title);
+    m_Window = new sf::RenderWindow(videoMode, title, sf::Style::Titlebar | sf::Style::Close);
 }
 
 // destroys the Window and closes

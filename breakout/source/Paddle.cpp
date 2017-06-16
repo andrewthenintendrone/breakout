@@ -1,4 +1,5 @@
 #include "Paddle.h"
+#include "InputManager.h"
 
 // default constructor
 Paddle::Paddle()
@@ -17,7 +18,7 @@ Paddle::Paddle(std::string& imageFileName)
 void Paddle::Control()
 {
     // left
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    if (INPUTMANAGER->keyHeld(sf::Keyboard::Left) || INPUTMANAGER->keyHeld(sf::Keyboard::A))
     {
         if (getSprite().getGlobalBounds().left > 0)
         {
@@ -25,12 +26,17 @@ void Paddle::Control()
         }
     }
     // right
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    if(INPUTMANAGER->keyHeld(sf::Keyboard::Right) || INPUTMANAGER->keyHeld(sf::Keyboard::D))
     {
         if ((getSprite().getGlobalBounds().left + getSprite().getGlobalBounds().width) < WINDOWMANAGER->getSize().x)
         {
             getSprite().move(600 * TIMEMANAGER->deltaTime(), 0);
         }
     }
+
+    // mouse movemenet
+    //getSprite().setPosition(INPUTMANAGER->mousePosition().x, getSprite().getPosition().y);
+
+
     draw();
 }
