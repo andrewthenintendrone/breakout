@@ -12,11 +12,10 @@ public:
     static WindowManager* getInstance();
 
     void setWindow(sf::RenderWindow* window);
-    void setIcon(std::string& iconFileName);
     sf::RenderWindow* getWindow();
     sf::Vector2u getSize();
 
     void closeWindow();
 private:
-    sf::RenderWindow* m_Window;
+    sf::RenderWindow* m_window;
 };
